@@ -592,6 +592,13 @@ def generate_automodsumm_docs(lines, srcfn, app=None, suffix='.rst',
                                       include_base=include_base)
                 ns['methods'].sort()
                 ns['attributes'].sort()
+            elif doc.objtype == 'pydantic_model':
+                if inherited_mem is not None:
+                    # option set in this specifc directive
+                    ns['includebase'] = inherited_mem
+                else:
+                    # use default value
+                    ns['includebase'] = inherited_members
 
             parts = name.split('.')
             if doc.objtype in ('method', 'attribute'):
